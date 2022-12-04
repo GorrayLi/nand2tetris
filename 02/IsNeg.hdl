@@ -1,0 +1,11 @@
+/**
+ * IsNeg: 
+ * out = 0 or 1
+ */
+CHIP IsNeg {
+    IN in[16];
+    OUT out;
+
+    PARTS:
+    And(a=in[15], b=true, out=out);
+}
