@@ -1,11 +1,13 @@
 import sys
 import os
 from JackTokenizer import JackTokenizer
-#from CompilationEngine import CompilationEngine
+from CompilationEngine import CompilationEngine
 import xml.dom.minidom
 
 file_path = sys.argv[1]
+#file_path = "10/ArrayTest/"
 output_path = sys.argv[2]
+#output_path = "10/output/ArrayTest/"
 
 # JackAnalyzer func
 def JackAnalyzer(intput_file, output_path):
@@ -67,13 +69,17 @@ def JackAnalyzer(intput_file, output_path):
     fdir, fname = os.path.split(intput_file)
     fbase, fext = os.path.splitext(fname)
     filename_xml = fbase + 'T' + '.xml'
-    filepath_xml = os.path.join(output_path, filename_xml) 
+    filepath_tokens_xml = os.path.join(output_path, filename_xml) 
     
-    with open(filepath_xml, "w") as file:
-        file.write(doc_str)
+    with open(filepath_tokens_xml, "w") as file_tokens:
+        file_tokens.write(doc_str)
             
     #parse
-        
+    filename_xml = fbase + '.xml'
+    filepath_parse_xml = os.path.join(output_path, filename_xml)
+    jack_parser = CompilationEngine(filepath_tokens_xml, filepath_parse_xml)
+    jack_parser.CompileClass()
+    
 
 # main program
 if os.path.isfile(file_path):
